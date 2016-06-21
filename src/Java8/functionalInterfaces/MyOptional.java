@@ -1,4 +1,4 @@
-package Java8;
+package Java8.functionalInterfaces;
 
 import java.util.Optional;
 
