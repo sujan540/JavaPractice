@@ -3,15 +3,15 @@ package tree;
 /**
  * Created by root on 2018-03-07.
  */
-public class BinaryTree1 {
+public class A_BinaryTree_Basic {
 
     Node root;
 
-    BinaryTree1() {
+    A_BinaryTree_Basic() {
         this.root = null;
     }
 
-    BinaryTree1(int value) {
+    A_BinaryTree_Basic(int value) {
         this.root = new Node(value);
     }
 
@@ -27,7 +27,7 @@ public class BinaryTree1 {
 
 
     public static void main(String[] args) {
-        BinaryTree1 binaryTree = new BinaryTree1(1);
+        A_BinaryTree_Basic binaryTree = new A_BinaryTree_Basic(1);
 
         binaryTree.root.left = new Node(2);
 
