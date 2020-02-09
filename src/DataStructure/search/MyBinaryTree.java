@@ -5,6 +5,23 @@ package DataStructure.search;
  */
 public class MyBinaryTree {
 
+    static class Node {
+        int key;
+        String name;
+
+        Node left;
+        Node right;
+
+        Node(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
+
+        public String toString() {
+            return name + " has a key " + key;
+        }
+    }
+
     Node root;
 
     public void addNode(int key, String name) {
@@ -19,17 +36,17 @@ public class MyBinaryTree {
             while (true) {
                 parent = focusNode;
                 if (key < focusNode.key) {
-                    focusNode = focusNode.leftChild;
+                    focusNode = focusNode.left;
 
                     if (focusNode == null) {
-                        parent.leftChild = newNode;
+                        parent.left = newNode;
                         return;
                     }
                 } else {
-                    focusNode = focusNode.rightChild;
+                    focusNode = focusNode.right;
 
                     if (focusNode == null) {
-                        parent.rightChild = newNode;
+                        parent.right = newNode;
                         return;
                     }
                 }
@@ -41,10 +58,10 @@ public class MyBinaryTree {
         Node focusNode = root;
         while (focusNode.key != key) {
             if (key < focusNode.key) {
-                focusNode = focusNode.leftChild;
+                focusNode = focusNode.left;
 
             } else {
-                focusNode = focusNode.rightChild;
+                focusNode = focusNode.right;
             }
             if (focusNode == null) {
                 return null;
@@ -55,24 +72,24 @@ public class MyBinaryTree {
 
     public void inOrderTraverseTree(Node focusNode) {
         if (focusNode != null) {
-            inOrderTraverseTree(focusNode.leftChild);
+            inOrderTraverseTree(focusNode.left);
             System.out.println(focusNode);
-            inOrderTraverseTree(focusNode.rightChild);
+            inOrderTraverseTree(focusNode.right);
         }
     }
 
     public void preOrderTraverseTree(Node focusNode) {
         if (focusNode != null) {
             System.out.println(focusNode);
-            preOrderTraverseTree(focusNode.leftChild);
-            preOrderTraverseTree(focusNode.rightChild);
+            preOrderTraverseTree(focusNode.left);
+            preOrderTraverseTree(focusNode.right);
         }
     }
 
     public void postOrderTraverseTree(Node focusNode) {
         if (focusNode != null) {
-            postOrderTraverseTree(focusNode.leftChild);
-            postOrderTraverseTree(focusNode.rightChild);
+            postOrderTraverseTree(focusNode.left);
+            postOrderTraverseTree(focusNode.right);
             System.out.println(focusNode);
         }
     }
@@ -81,54 +98,54 @@ public class MyBinaryTree {
         Node focusNode = root;
         Node parent = root;
 
-        boolean isItALeftChild = true;
+        boolean isItAleft = true;
         while (focusNode.key != key) {
             parent = focusNode;
 
             if (key < focusNode.key) {
-                isItALeftChild = true;
-                focusNode = focusNode.leftChild;
+                isItAleft = true;
+                focusNode = focusNode.left;
             } else {
-                isItALeftChild = false;
-                focusNode = focusNode.rightChild;
+                isItAleft = false;
+                focusNode = focusNode.right;
             }
 
             if (focusNode == null) {
                 return false;
             }
         }
-        if (focusNode.leftChild == null && focusNode.rightChild == null) {
+        if (focusNode.left == null && focusNode.right == null) {
             if (focusNode == root) {
                 root = null;
-            } else if (isItALeftChild) {
-                parent.leftChild = null;
+            } else if (isItAleft) {
+                parent.left = null;
             } else {
-                parent.rightChild = null;
+                parent.right = null;
             }
-        } else if (focusNode.rightChild == null) {
+        } else if (focusNode.right == null) {
             if (focusNode == root)
-                root = focusNode.leftChild;
-            else if (isItALeftChild)
-                parent.leftChild = focusNode.leftChild;
+                root = focusNode.left;
+            else if (isItAleft)
+                parent.left = focusNode.left;
             else
-                parent.rightChild = focusNode.rightChild;
-        } else if (focusNode.leftChild == null) {
+                parent.right = focusNode.right;
+        } else if (focusNode.left == null) {
             if (focusNode == root)
-                root = focusNode.rightChild;
-            else if (isItALeftChild)
-                parent.leftChild = focusNode.rightChild;
+                root = focusNode.right;
+            else if (isItAleft)
+                parent.left = focusNode.right;
             else
-                parent.rightChild = focusNode.leftChild;
+                parent.right = focusNode.left;
         } else {
             Node replacement = getReplacementNode(focusNode);
             if (focusNode == root)
                 root = replacement;
-            else if (isItALeftChild)
-                parent.leftChild = replacement;
+            else if (isItAleft)
+                parent.left = replacement;
             else
-                parent.rightChild = replacement;
+                parent.right = replacement;
 
-            replacement.leftChild = focusNode.leftChild;
+            replacement.left = focusNode.left;
         }
 
         return true;
@@ -138,16 +155,16 @@ public class MyBinaryTree {
         Node replacementParent = replaceNode;
         Node replacement = replaceNode;
 
-        Node focusNode = replaceNode.rightChild;
+        Node focusNode = replaceNode.right;
 
         while (focusNode != null) {
             replacementParent = replacement;
             replacement = focusNode;
-            focusNode = focusNode.leftChild;
+            focusNode = focusNode.left;
         }
-        if (replacement != replaceNode.rightChild) {
-            replacementParent.leftChild = replacement.rightChild;
-            replacement.rightChild = replaceNode.rightChild;
+        if (replacement != replaceNode.right) {
+            replacementParent.left = replacement.right;
+            replacement.right = replaceNode.right;
         }
         return replacement;
     }
@@ -172,19 +189,4 @@ public class MyBinaryTree {
     }
 }
 
-class Node {
-    int key;
-    String name;
 
-    Node leftChild;
-    Node rightChild;
-
-    Node(int key, String name) {
-        this.key = key;
-        this.name = name;
-    }
-
-    public String toString() {
-        return name + " has a key " + key;
-    }
-}
