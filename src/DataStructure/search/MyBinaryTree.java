@@ -73,14 +73,14 @@ public class MyBinaryTree {
     public void inOrderTraverseTree(Node focusNode) {
         if (focusNode != null) {
             inOrderTraverseTree(focusNode.left);
-            System.out.println(focusNode);
+            System.out.print(focusNode.key + "->");
             inOrderTraverseTree(focusNode.right);
         }
     }
 
     public void preOrderTraverseTree(Node focusNode) {
         if (focusNode != null) {
-            System.out.println(focusNode);
+            System.out.print(focusNode.key + "->");
             preOrderTraverseTree(focusNode.left);
             preOrderTraverseTree(focusNode.right);
         }
@@ -90,7 +90,7 @@ public class MyBinaryTree {
         if (focusNode != null) {
             postOrderTraverseTree(focusNode.left);
             postOrderTraverseTree(focusNode.right);
-            System.out.println(focusNode);
+            System.out.print(focusNode.key + "->");
         }
     }
 
@@ -177,14 +177,39 @@ public class MyBinaryTree {
         theTree.addNode(15, "Office Manager");
         theTree.addNode(30, "Secreatary");
         theTree.addNode(75, "Sales Manager");
+        theTree.addNode(70, "Salesman 2");
         theTree.addNode(85, "Salesman 1");
+        theTree.addNode(89, "Salesman 3");
+        theTree.addNode(80, "Salesman 4");
+        theTree.addNode(73, "Salesman 5");
+        //theTree.addNode(69, "Salesman 6");
 
-        System.out.println("Remove key 25");
-        theTree.remove(25);
+//        System.out.println("Remove key 25");
+//        theTree.remove(25);
+
+        System.out.println("");
+        theTree.inOrderTraverseTree(theTree.root);
+        System.out.println("");
+
+        theTree.preOrderTraverseTree(theTree.root);
+        System.out.println("");
 
         theTree.postOrderTraverseTree(theTree.root);
+        System.out.println("");
 
-        System.out.println(theTree.findNode(30));
+        theTree.remove(50);
+
+        System.out.println("");
+        theTree.inOrderTraverseTree(theTree.root);
+        System.out.println("");
+
+        theTree.preOrderTraverseTree(theTree.root);
+        System.out.println("");
+
+        theTree.postOrderTraverseTree(theTree.root);
+        System.out.println("");
+
+        // System.out.println(theTree.findNode(30));
 
     }
 }
