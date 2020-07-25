@@ -63,7 +63,7 @@ public class LinkedList1 {
 		list.addToTheLast(new Node(2));
 
 		list.printList(head);
-		// Reversing LinkedList
+		// Reversing SingularLinkedList
 		Node reverseHead = reverseLinkedList(head);
 		System.out.println("After reversing");
 		list.printList(reverseHead);

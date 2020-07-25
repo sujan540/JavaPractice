@@ -9,67 +9,67 @@ import java.util.Arrays;
 public class MyArrayList {
 
     private Object[] arrays;
-    private int size=0;
+    private int size = 0;
 
-    public MyArrayList(){
+    public MyArrayList() {
         arrays = new Object[10];
     }
 
-    public Object get(int index){
-        if(index<size)
+    public Object get(int index) {
+        if (index < size)
             return arrays[index];
 
         throw new ArrayIndexOutOfBoundsException();
 
     }
 
-    public void add(Object value){
-        if(arrays.length-size<=5){
+    public void add(Object value) {
+        if (arrays.length - size <= 5) {
             incrementArraySize();
         }
-        arrays[size++]=value;
+        arrays[size++] = value;
     }
 
-    public void incrementArraySize(){
-        arrays = Arrays.copyOf(arrays,arrays.length*2);
+    public void incrementArraySize() {
+        arrays = Arrays.copyOf(arrays, arrays.length * 2);
     }
 
-    public Object remove(int index){
-        if(index<size){
+    public Object remove(int index) {
+        if (index < size) {
             Object obj = arrays[index];
-            arrays[index]=null;
+            arrays[index] = null;
             int temp = index;
-            while(temp<size){
-                arrays[temp]=arrays[temp+1];
-                arrays[temp+1]=null;
+            while (temp < size) {
+                arrays[temp] = arrays[temp + 1];
+                arrays[temp + 1] = null;
                 temp++;
 
             }
             size--;
-            return  obj;
+            return obj;
         }
         throw new ArrayIndexOutOfBoundsException();
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         MyArrayList array = new MyArrayList();
-        for(int i=0;i<10;i++) {
-            array.add(new Integer(10+i));
+        for (int i = 0; i < 10; i++) {
+            array.add(new Integer(10 + i));
         }
 
-        System.out.println("Size:"+array.size());
+        System.out.println("Size:" + array.size());
 
-        for(int i=0;i<array.size();i++){
-            System.out.println("Out array["+i+"]:"+array.get(i));
+        for (int i = 0; i < array.size(); i++) {
+            System.out.println("Out array[" + i + "]:" + array.get(i));
         }
 
-        System.out.println("Remove array[5]:"+array.remove(5));
-        for(int i=0;i<array.size();i++){
-            System.out.println("Out again array["+i+"]:"+array.get(i));
+        System.out.println("Remove array[5]:" + array.remove(5));
+        for (int i = 0; i < array.size(); i++) {
+            System.out.println("Out again array[" + i + "]:" + array.get(i));
         }
     }
 }

@@ -21,8 +21,9 @@ class Islands {
         visited[row][col] = true;
 
         for (int k = 0; k < 8; ++k)
-            if (isSafe(M, row + rowNbr[k], col + colNbr[k], visited))
+            if (isSafe(M, row + rowNbr[k], col + colNbr[k], visited)) {
                 DFS(M, row + rowNbr[k], col + colNbr[k], visited);
+            }
     }
 
     int countIslands(int M[][]) {
@@ -41,8 +42,8 @@ class Islands {
 
     public static void main(String[] args){
         int M[][] = new int[][]{
-                {1, 1, 0, 0, 0},
-                {0, 1, 0, 0, 1},
+                {1, 0, 0, 1, 0},
+                {0, 1, 0, 0, 0},
                 {1, 0, 0, 1, 1},
                 {0, 0, 0, 0, 0},
                 {1, 0, 1, 1, 0}};

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 /**
  * Created by root on 2020-02-07.
  */
-public class Google1 {
+public class CreateTreeGoogleQuestion {
     static class Relative {
         String parent;
         String child;
@@ -67,7 +67,8 @@ public class Google1 {
 //    }
 
     public static String getRoot(Map<String, List<String>> adjList, Set<String> children) {
-        List<String> root = adjList.entrySet().stream().filter(entry -> !children.contains(entry.getKey()))
+        List<String> root = adjList.entrySet().stream()
+                .filter(entry -> !children.contains(entry.getKey()))
                 .map(maps -> maps.getKey())
                 .collect(Collectors.toList());
         if (!root.isEmpty()) {
@@ -122,7 +123,7 @@ public class Google1 {
         graph.add(new Relative("animal", "fish"));
 
         Set<String> parents = graph.stream().map(relative -> relative.parent).collect(Collectors.toSet());
-        Set<String> children = graph.stream().map(relative -> relative.child).collect(Collectors.toSet());
+        Set<String> childrens = graph.stream().map(relative -> relative.child).collect(Collectors.toSet());
 
         Map<String, List<String>> maps = new HashMap<>();
 
@@ -139,19 +140,19 @@ public class Google1 {
 
         String root = "";
         for (String parent : parents) {
-            if (!children.contains(parent)) {
+            if (!childrens.contains(parent)) {
                 root = parent;
                 break;
             }
         }
 
-        Node parent = new Node(root);
-        createTree(parent, maps);
-        print(parent);
+        Node rootNode = new Node(root);
+        createTree(rootNode, maps);
+        print(rootNode);
 
 
-        System.out.println(root);
-        //printTree(graph);
+//        System.out.println(root);
+//        printTree(graph);
 
 
     }

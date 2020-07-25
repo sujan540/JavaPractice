@@ -1,79 +1,59 @@
 package DataStructure.graph.BFS;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by root on 2020-02-19.
  */
 public class Cyclic {
 
-    static class Graph {
-        private int V;
-        private LinkedList adj[];
+    public static int segment(int x, int arr[]) {
 
-        Graph(int v) {
-            adj[v] = new LinkedList();
-        }
+        final List<List<Integer>> output = new ArrayList<>();
 
-        void addEdge(int a, int b) {
-            adj[a].add(b);
-            adj[b].add(a);
-        }
+        int length = arr.length;
 
-
-        Boolean isCyclicUtil(int v, Boolean visited[], int parent) {
-            // Mark the current node as visited
-            visited[v] = true;
-            Integer i;
-
-            // Recur for all the vertices adjacent to this vertex
-            Iterator<Integer> it = adj[v].iterator();
-            while (it.hasNext()) {
-                i = it.next();
-
-                // If an adjacent is not visited, then recur for that
-                // adjacent
-                if (!visited[i]) {
-                    if (isCyclicUtil(i, visited, v))
-                        return true;
+        // This is bruth force techinque I'm using,
+        // If time allow me I can improve this using Graph in better way
+        for (int i = 0; i < length; i++) {
+            List<Integer> temp = new ArrayList<>();
+            for (int j = i; j < x + i ; j++) {
+                if (j < length) {
+                    temp.add(arr[j]);
                 }
-
-                // If an adjacent is visited and not parent of current
-                // vertex, then there is a cycle.
-                else if (i != parent)
-                    return true;
             }
-            return false;
+            if(temp.size() == x){
+                output.add(temp);
+            }
         }
 
-        // Returns true if the graph contains a cycle, else false.
-        Boolean isCyclic() {
-            // Mark all the vertices as not visited and not part of
-            // recursion stack
-            Boolean visited[] = new Boolean[V];
-            for (int i = 0; i < V; i++)
-                visited[i] = false;
+        final List<Integer> finalOutput = new ArrayList<>();
 
-            // Call the recursive helper function to detect cycle in
-            // different DFS trees
-            for (int u = 0; u < V; u++)
-                if (!visited[u]) // Don't recur for u if already visited
-                    if (isCyclicUtil(u, visited, -1))
-                        return true;
-
-            return false;
+        for (final List<Integer> result : output) {
+            // Probably I don't need to do multiple sorting but
+            // I guess this inbuilt can can perform with O(nlogn)
+            Collections.sort(result);
+            finalOutput.add(result.get(0));
         }
+
+        Collections.sort(finalOutput);
+
+        return finalOutput.get(finalOutput.size() - 1);
     }
 
-    public static void main(String[] args) {
-        Graph g1 = new Graph(5);
-        g1.addEdge(1, 0);
-        g1.addEdge(0, 2);
-        g1.addEdge(2, 1);
-        g1.addEdge(0, 3);
-        g1.addEdge(3, 4);
+    public static void main(String args[]){
+
+        Scanner scanner = new Scanner(System.in);
+
+        int x = scanner.nextInt();
+        int n = scanner.nextInt();
+
+        int arr[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        System.out.println(segment(x, arr));
+
+        scanner.close();
     }
 }

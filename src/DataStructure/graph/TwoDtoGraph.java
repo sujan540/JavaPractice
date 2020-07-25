@@ -17,6 +17,7 @@ public class TwoDtoGraph {
         return (x >= 0 && x < X) && (y >= 0 && y < Y);
     }
 
+
     static void DFS(int x, int y, int[][] arrays) {
         visited[x][y] = true;
         for (int i = 0; i < 8; i++) {
@@ -34,7 +35,7 @@ public class TwoDtoGraph {
     public static void main(String[] args) {
         int[][] arrays = new int[][]{
                 {1, 1, 0, 0, 0},
-                {0, 1, 1, 0, 1},
+                {0, 1, 0, 0, 1},
                 {1, 0, 0, 1, 1},
                 {0, 0, 0, 0, 0},
                 {1, 0, 1, 0, 0}
